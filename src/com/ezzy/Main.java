@@ -18,6 +18,8 @@ public class Main {
         System.out.println(list.indexOf(20));
         list.deleteFirst();
         System.out.println(list.contains(50));
+        list.deleteLast();
+        System.out.println(list.contains(30));
 
     }
 }
