@@ -12,8 +12,10 @@ public class Main {
         list.addLast(20);
         list.addLast(30);
 
-        list.addFirst(40);
-        list.addFirst(50);
+         list.addFirst(40);
+         list.addFirst(50);
+
+        System.out.println(list.indexOf(20));
 
     }
 }
