@@ -1,8 +1,11 @@
 package com.ezzy;
 
 import com.ezzy.arrays.Array;
+import com.ezzy.linked_list.DoublyLinkedList;
 import com.ezzy.linked_list.LinkedList;
 import com.ezzy.stack.Stack;
+
+import java.awt.*;
 
 public class Main {
 
@@ -51,6 +54,18 @@ public class Main {
         array.set(0, "Moscow");
         System.out.println(array.toString());
         System.out.println(array.iterator().next());
+
+        // DOUBLY LINKED LIST IMPLEMENTATION
+        var doublyList = new DoublyLinkedList<String>();
+        System.out.println("\n DOUBLY LINKED LIST");
+        doublyList.add("Hanoi");
+        doublyList.addFirst("Melbourne");
+        doublyList.addLast("Sydney");
+        System.out.println(doublyList.peekFirst());
+        System.out.println(doublyList.peekLast());
+        System.out.println(doublyList.indexOf("Hanoi"));
+        System.out.println(doublyList.contains("Sydney"));
+        System.out.println(doublyList.size());
 
     }
 }
