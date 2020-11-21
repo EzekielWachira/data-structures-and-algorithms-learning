@@ -27,15 +27,15 @@ public class Main {
         System.out.println(list.contains(30));
 
         // STACK IMPLEMENTATION
-        Stack stack = new Stack(10);
-        if (!stack.isFull()){
-            stack.push(10);
-            stack.push(20);
-            stack.push(30);
-
-//            System.out.println(stack.pop());
-            System.out.println(stack.getSize());
-        }
+        System.out.println("\nSTACK");
+        var stack = new Stack<Integer>();
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        System.out.println(stack.pop());
+        stack.push(89);
+        System.out.println(stack.peek());
+        System.out.println(stack.indexOf(20));
 
         //ARRAY IMPLEMENTATION
         System.out.println("ARRAYS");

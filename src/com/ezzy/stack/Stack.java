@@ -1,45 +1,50 @@
 package com.ezzy.stack;
 
-public class Stack {
-    private int[] stack;
-    private int top;
-    private int size;
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.LinkedList;
 
-    public Stack() {
-        top = -1;
-        size = 50;
-        stack = new int[50];
+public class Stack<T> implements Iterable<T> {
+
+    private LinkedList<T> linkedList = new LinkedList<T>();
+
+    public Stack() { }
+
+    public Stack(T firstElement){
+        push(firstElement);
     }
 
-    public Stack(int size) {
-        this.size = size;
-        stack = new int[size];
-    }
-
-    public boolean push(int item){
-        if (isFull()){
-            top++;
-            stack[top] = item;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public int pop(){
-        return stack[top - 1];
+    public int size(){
+        return linkedList.size();
     }
 
     public boolean isEmpty(){
-        return top == -1;
-//        return stack.length == 0;
+        return size() == 0;
     }
 
-    public int getSize(){
-        return stack.length;
+    public int indexOf(Object obj){
+        for (int i = 0; i < linkedList.size(); i++){
+            if (obj.equals(linkedList.get(i))) return i;
+        }
+        return -1;
     }
 
-    public boolean isFull(){
-        return (top == stack.length - 1);
+    public void push(T element){
+        linkedList.push(element);
+    }
+
+    public T pop(){
+        if (isEmpty()) throw new EmptyStackException();
+        return linkedList.removeLast();
+    }
+
+    public T peek(){
+        if (isEmpty()) throw new EmptyStackException();
+        return linkedList.peek();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return linkedList.iterator();
     }
 }
