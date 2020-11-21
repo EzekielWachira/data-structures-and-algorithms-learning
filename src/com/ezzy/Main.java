@@ -1,5 +1,6 @@
 package com.ezzy;
 
+import com.ezzy.arrays.Array;
 import com.ezzy.linked_list.LinkedList;
 import com.ezzy.stack.Stack;
 
@@ -33,7 +34,23 @@ public class Main {
             System.out.println(stack.getSize());
         }
 
-
+        //ARRAY IMPLEMENTATION
+        System.out.println("ARRAYS");
+        Array<String> array = new Array<>(2);
+        array.add("Tokyo");
+        array.add("London");
+        System.out.println(array.size());
+        array.add("Nairobi");
+        System.out.println(array.size());
+        System.out.println(array.indexOf("Tokyo"));
+        System.out.println(array.contains("London"));
+        System.out.println(array.toString());
+        array.removeAt(0);
+        System.out.println(array.get(0));
+        System.out.println(array.toString());
+        array.set(0, "Moscow");
+        System.out.println(array.toString());
+        System.out.println(array.iterator().next());
 
     }
 }
