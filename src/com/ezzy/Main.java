@@ -3,6 +3,7 @@ package com.ezzy;
 import com.ezzy.arrays.Array;
 import com.ezzy.linked_list.DoublyLinkedList;
 import com.ezzy.linked_list.LinkedList;
+import com.ezzy.queue.Queue;
 import com.ezzy.stack.Stack;
 
 import java.awt.*;
@@ -66,6 +67,17 @@ public class Main {
         System.out.println(doublyList.indexOf("Hanoi"));
         System.out.println(doublyList.contains("Sydney"));
         System.out.println(doublyList.size());
+
+        //QUEUE IMPLEMENTATION
+        var queue = new Queue<Integer>();
+        System.out.println("\nQUEUE");
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        System.out.println(queue.peek());
+        queue.poll();
+        System.out.println(queue.peek());
+
 
     }
 }
