@@ -88,5 +88,29 @@ public class PriorityQueue<T extends Comparable<T>> {
             heap.add(element);
             heapCapacity++;
         }
+
+
+
     }
+
+    //checks if node i <= node j
+    public boolean less(int i, int j){
+        T node1 = heap.get(i);
+        T node2 = heap.get(j);
+        return node1.compareTo(node2) <= 0;
+    }
+
+    //swim the node up O(log(n))
+    public void swim(int k){
+        //get the parent
+        int parent = (k - 1) / 2;
+
+        //keep swimming up the node while still not the root node
+        while (k > 0 && less(k, parent)){
+
+            k = parent;
+            parent = (k - 1) / 2;
+        }
+    }
+    
 }
