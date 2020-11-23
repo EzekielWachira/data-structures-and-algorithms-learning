@@ -131,7 +131,14 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     private void swap(int i, int j){
+        T i_element = heap.get(i);
+        T j_element = heap.get(j);
+
+        heap.set(i, j_element);
+        heap.set(j, i_element);
 
     }
+
+     
 
 }
