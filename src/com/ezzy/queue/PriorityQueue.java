@@ -55,4 +55,38 @@ public class PriorityQueue<T extends Comparable<T>> {
         heapSize = 0;
         map.clear();
     }
+
+    public int size(){
+        return heapSize;
+    }
+
+    public T peek(){
+        if (isEmpty()) return null;
+        return heap.get(0);
+    }
+
+    public T poll(){
+
+    }
+
+    public boolean contains(T element){
+//        for (int i = 0; i < heapCapacity; i++){
+//            if (heap.contains(element)){
+//                return true;
+//            }
+//        }
+        if (element == null) return false;
+        return map.containsKey(element);
+    }
+
+    public void add(T element){
+        if (element == null) throw new IllegalArgumentException();
+
+        if (heapSize < heapCapacity){
+            heap.set(heapSize, element);
+        } else {
+            heap.add(element);
+            heapCapacity++;
+        }
+    }
 }
