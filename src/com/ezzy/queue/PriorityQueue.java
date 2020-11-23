@@ -94,14 +94,14 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     //checks if node i <= node j
-    public boolean less(int i, int j){
+    private boolean less(int i, int j){
         T node1 = heap.get(i);
         T node2 = heap.get(j);
         return node1.compareTo(node2) <= 0;
     }
 
     //swim the node up O(log(n))
-    public void swim(int k){
+    private void swim(int k){
         //get the parent
         int parent = (k - 1) / 2;
 
@@ -112,5 +112,26 @@ public class PriorityQueue<T extends Comparable<T>> {
             parent = (k - 1) / 2;
         }
     }
-    
+
+    private void sink(int k){
+        while (true){
+            int left = 2 * k + 1;
+            int right = 2 * k + 2;
+            int smallest = left;
+
+            if (right < heapSize && less(right, left)){
+                smallest = right;
+            }
+            if (left >= heapSize || less(k, smallest)){
+                break;
+            }
+
+            k = smallest;
+        }
+    }
+
+    private void swap(int i, int j){
+
+    }
+
 }
