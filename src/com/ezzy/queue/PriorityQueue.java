@@ -1,5 +1,7 @@
 package com.ezzy.queue;
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class PriorityQueue<T extends Comparable<T>> {
@@ -20,19 +22,19 @@ public class PriorityQueue<T extends Comparable<T>> {
         heap = new ArrayList<>(size);
     }
 
-    //construct a priority queue using heapify
+    //construct a priority queue using  heapify
     public PriorityQueue(T[] elements){
         heapSize = heapCapacity = elements.length;
         heap = new ArrayList<T>(heapCapacity);
         //place elements on the heap
         for (int i = 0; i < heapSize; i++){
-
+            mapAdd(elements[i], i);
             heap.add(elements[i]);
         }
 
         //heapify process O(n)
         for (int i = Math.max(0, (heapSize / 2) - 1); i >= 0; i--){
-
+            sink(i);
         }
     }
 
@@ -40,7 +42,7 @@ public class PriorityQueue<T extends Comparable<T>> {
     public PriorityQueue(Collection<T> elements){
         this(elements.size());
         for (T element: elements) {
-            //
+            add(element);
         }
     }
 
@@ -66,7 +68,7 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     public T poll(){
-
+        return removeAt(0);
     }
 
     public boolean contains(T element){
@@ -89,8 +91,9 @@ public class PriorityQueue<T extends Comparable<T>> {
             heapCapacity++;
         }
 
-
-
+        mapAdd(element, heapSize);
+        swim(heapSize);
+        heapSize++;
     }
 
     //checks if node i <= node j
@@ -107,7 +110,7 @@ public class PriorityQueue<T extends Comparable<T>> {
 
         //keep swimming up the node while still not the root node
         while (k > 0 && less(k, parent)){
-
+            swap(parent, k);
             k = parent;
             parent = (k - 1) / 2;
         }
@@ -137,8 +140,89 @@ public class PriorityQueue<T extends Comparable<T>> {
         heap.set(i, j_element);
         heap.set(j, i_element);
 
+        mapSwap(i_element, j_element, i, j);
+
     }
 
-     
+     public boolean remove(T element){
+        if (element == null)
+            return false;
+        Integer index = mapGet(element);
+        if (index != null){
+            removeAt(index);
+        }
+        return index != null;
+     }
 
+     private T removeAt(int i){
+        if (isEmpty()) return null;
+
+        heapSize--;
+        T removedData = heap.get(i);
+        swap(i, heapSize);
+
+        heap.set(heapSize, null);
+
+        if (i == heapSize) return removedData;
+
+        T element = heap.get(i);
+
+        sink(i);
+        if (heap.get(i).equals(element)){
+            swim(i);
+        }
+
+        return removedData;
+     }
+
+     public boolean isMeanHeap(int k){
+        if (k >= heapSize) return true;
+        int left = 2 * k + 1;
+        int right = 2 * k + 2;
+
+        if (left < heapSize && !less(k, left)) return false;
+        if (right < heapSize && !less(k, right)) return false;
+
+        return isMeanHeap(left) && isMeanHeap(right);
+     }
+
+     private void mapAdd(T value, int index){
+        TreeSet<Integer> set = map.get(value);
+        if (set == null){
+            set = new TreeSet<>();
+            set.add(index);
+            map.put(value, set);
+        } else {
+            set.add(index);
+        }
+     }
+
+     private void mapRemove(T value, int index){
+        TreeSet<Integer> set = map.get(value);
+        set.remove(index);
+        if (set.size() == 0){
+            map.remove(value);
+        }
+     }
+
+     private Integer mapGet(T value){
+         TreeSet<Integer> set = map.get(value);
+         if (set != null){
+             return set.last();
+         }
+         return null;
+     }
+
+     private void mapSwap(T val1, T val2, int val1Index, int val2Index){
+        Set<Integer> set1 = map.get(val1);
+        Set<Integer> set2 = map.get(val2);
+
+        set1.remove(val2Index);
+        set2.remove(val1Index);
+     }
+
+    @Override
+    public String toString() {
+        return heap.toString();
+    }
 }
