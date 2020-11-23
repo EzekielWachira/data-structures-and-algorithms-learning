@@ -3,6 +3,7 @@ package com.ezzy;
 import com.ezzy.arrays.Array;
 import com.ezzy.linked_list.DoublyLinkedList;
 import com.ezzy.linked_list.LinkedList;
+import com.ezzy.queue.PriorityQueue;
 import com.ezzy.queue.Queue;
 import com.ezzy.stack.Stack;
 
@@ -77,6 +78,18 @@ public class Main {
         System.out.println(queue.peek());
         queue.poll();
         System.out.println(queue.peek());
+
+        //PRIORITY QUEUE IMPLEMENTATION
+        var pQueue = new PriorityQueue<Integer>();
+        System.out.println("\nPRIORITY QUEUE");
+        pQueue.add(11);
+        pQueue.add(12);
+        pQueue.add(13);
+        pQueue.add(14);
+        System.out.println("\nIs min heap??? " + pQueue.isMeanHeap(16));
+        System.out.println(pQueue.peek());
+        pQueue.poll();
+        System.out.println(pQueue.peek());
 
 
     }
